@@ -31,28 +31,22 @@ public:
     void deleteDuplicates(LinkedList<T>& list) {
         using Node = typename LinkedList<T>::Node;
 
+        // Base cases: if the list has 0 or 1 element, no duplicates can exist[cite: 4]
         if (list.head == nullptr || list.head->next == nullptr) {
             return;
         }
 
-        Node* current = list.head;
-
-        while (current != nullptr && current->next != nullptr) {
-            if (current->item == current->next->item) {
-                Node* nodeToDelete = current->next;
-                current->next = current->next->next;
-
-                // Update tail if the removed element was the last one
-                if (nodeToDelete == list.tail) {
-                    list.tail = current;
-                }
-
-                delete nodeToDelete;
-                list.count--;
-            } else {
-                current = current->next;
-            }
-        }
+        // TODO:
+        // 1. Initialize a pointer `current` pointing to `list.head`.
+        // 2. Loop while `current != nullptr` and `current->next != nullptr`.
+        // 3. If `current->item == current->next->item`:[cite: 4]
+        //    a. Store `current->next` in a temporary pointer `nodeToDelete`.[cite: 4]
+        //    b. Bypass the duplicate: set `current->next = current->next->next`.[cite: 4]
+        //    c. If `nodeToDelete == list.tail`, update `list.tail = current`.
+        //    d. Free memory explicitly using `delete nodeToDelete`.[cite: 4]
+        //    e. Decrement `list.count--`.
+        // 4. Otherwise (values are different):
+        //    a. Advance `current = current->next`.
     }
 
     // Helper to populate a LinkedList from a std::vector

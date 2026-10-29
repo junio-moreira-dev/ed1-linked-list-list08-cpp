@@ -35,30 +35,25 @@ public:
     void oddEvenList(LinkedList<T>& list) {
         using Node = typename LinkedList<T>::Node;
 
+        // Base case: lists with fewer than 3 nodes are already partitioned[cite: 5]
         if (list.head == nullptr || list.head->next == nullptr || list.head->next->next == nullptr) {
             return;
         }
 
-        Node* odd = list.head;
-        Node* even = list.head->next;
-        Node* evenHead = even;
-
-        while (even != nullptr && even->next != nullptr) {
-            odd->next = even->next;
-            odd = odd->next;
-            even->next = odd->next;
-            even = even->next;
-        }
-
-        // Link the end of odd list to the head of even list
-        odd->next = evenHead;
-
-        // Update list.tail to maintain consistency with LinkedList class
-        if (even != nullptr) {
-            list.tail = even;
-        } else {
-            list.tail = odd;
-        }
+        // TODO:
+        // 1. Initialize pointers:
+        //    - 'odd' pointing to list.head (1st node)[cite: 5].
+        //    - 'even' pointing to list.head->next (2nd node)[cite: 5].
+        //    - 'evenHead' pointing to even (to reconnect the sublists later)[cite: 5].
+        // 2. Loop while `even != nullptr` and `even->next != nullptr`[cite: 5]:
+        //    a. Bypass even node: odd->next = even->next[cite: 5].
+        //    b. Advance odd pointer: odd = odd->next.
+        //    c. Bypass next odd node: even->next = odd->next[cite: 5].
+        //    d. Advance even pointer: even = even->next.
+        // 3. Connect the end of the odd chain to the start of the even chain:
+        //    odd->next = evenHead[cite: 5].
+        // 4. Update `list.tail` for internal consistency:
+        //    - Set `list.tail = even` if even != nullptr, otherwise `list.tail = odd`.
     }
 
     // Helper to populate a LinkedList from a std::vector

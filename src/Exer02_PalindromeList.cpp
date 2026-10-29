@@ -26,17 +26,16 @@ private:
     template <typename T>
     typename LinkedList<T>::Node* reverseList(typename LinkedList<T>::Node* head) {
         using Node = typename LinkedList<T>::Node;
-        Node* prev = nullptr;
-        Node* current = head;
 
-        while (current != nullptr) {
-            Node* nextTemp = current->next;
-            current->next = prev;
-            prev = current;
-            current = nextTemp;
-        }
+        // TODO:
+        // 1. Initialize two pointers: prev = nullptr and current = head.
+        // 2. Loop while current != nullptr.
+        // 3. Store current->next in a temporary pointer nextTemp.
+        // 4. Reverse current node's link: current->next = prev.
+        // 5. Shift prev to current, and current to nextTemp.
+        // 6. Return prev (the new head of the reversed sublist).
 
-        return prev;
+        return nullptr;
     }
 
 public:
@@ -45,37 +44,21 @@ public:
     bool isPalindrome(LinkedList<T>& list) {
         using Node = typename LinkedList<T>::Node;
 
+        // Base cases: an empty list or a single node list is trivially a palindrome
         if (list.head == nullptr || list.head->next == nullptr) {
             return true;
         }
 
-        // Step 1: Find the end of the first half (slow pointer)
-        Node* slow = list.head;
-        Node* fast = list.head;
-        while (fast->next != nullptr && fast->next->next != nullptr) {
-            slow = slow->next;
-            fast = fast->next->next;
-        }
+        // TODO:
+        // Step 1: Locate the end of the first half using fast and slow pointers.
+        //         - Initialize slow and fast pointers to list.head.
+        //         - Advance while fast->next != nullptr && fast->next->next != nullptr.
+        // Step 2: Reverse the second half starting at slow->next using reverseList<T>().
+        // Step 3: Compare node items between the first half (list.head) and the reversed second half.
+        // Step 4: Restore the original list structure by reversing the second half back.
+        // Step 5: Return true if all paired items matched, or false otherwise.
 
-        // Step 2: Reverse the second half of the list
-        Node* secondHalfStart = reverseList<T>(slow->next);
-
-        // Step 3: Check whether it is a palindrome
-        Node* p1 = list.head;
-        Node* p2 = secondHalfStart;
-        bool palindrome = true;
-        while (palindrome && p2 != nullptr) {
-            if (p1->item != p2->item) {
-                palindrome = false;
-            }
-            p1 = p1->next;
-            p2 = p2->next;
-        }
-
-        // Step 4: Restore list structure to original state
-        slow->next = reverseList<T>(secondHalfStart);
-
-        return palindrome;
+        return false;
     }
 
     // Helper to populate a LinkedList from a std::vector

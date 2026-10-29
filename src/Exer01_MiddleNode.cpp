@@ -25,30 +25,29 @@ public:
     // Finds and returns a pointer to the middle node of the list
     template <typename T>
     typename LinkedList<T>::Node* findMiddleNode(const LinkedList<T>& list) {
-        using NodeT = typename LinkedList<T>::Node;
+        using Node = typename LinkedList<T>::Node;
 
-        NodeT* slow = list.head;
-        NodeT* fast = list.head;
+        // TODO:
+        // 1. Initialize two pointers, slow and fast, both pointing to list.head.
+        // 2. Loop while fast != nullptr and fast->next != nullptr.
+        // 3. Move slow forward by 1 step (slow = slow->next).
+        // 4. Move fast forward by 2 steps (fast = fast->next->next).
+        // 5. When the loop terminates, return slow (the middle node).
 
-        while (fast != nullptr && fast->next != nullptr) {
-            slow = slow->next;
-            fast = fast->next->next;
-        }
-
-        return slow;
+        return nullptr;
     }
 
     // Helper to generate a sublist starting at the middle node reusing LinkedList::toString()
     template <typename T>
     LinkedList<T> getMiddleSublist(const LinkedList<T>& list) {
-        using NodeT = typename LinkedList<T>::Node;
+        using Node = typename LinkedList<T>::Node;
         LinkedList<T> sublist;
-        NodeT* mid = findMiddleNode(list);
 
-        while (mid != nullptr) {
-            sublist.addLast(mid->item);
-            mid = mid->next;
-        }
+        // TODO:
+        // 1. Retrieve the middle node pointer using findMiddleNode(list).
+        // 2. Traverse the list from this middle node until reaching nullptr.
+        // 3. In each iteration, append the current item to 'sublist' using addLast().
+        // 4. Return the populated 'sublist'.
 
         return sublist;
     }

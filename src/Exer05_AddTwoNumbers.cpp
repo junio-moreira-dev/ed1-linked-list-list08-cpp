@@ -32,26 +32,16 @@ public:
         using Node = typename LinkedList<T>::Node;
 
         LinkedList<T> result;
-        Node* p1 = l1.head;
-        Node* p2 = l2.head;
-        int carry = 0;
 
-        while (p1 != nullptr || p2 != nullptr || carry != 0) {
-            int sum = carry;
-
-            if (p1 != nullptr) {
-                sum += p1->item;
-                p1 = p1->next;
-            }
-
-            if (p2 != nullptr) {
-                sum += p2->item;
-                p2 = p2->next;
-            }
-
-            carry = sum / 10;
-            result.addLast(static_cast<T>(sum % 10));
-        }
+        // TODO:
+        // 1. Initialize pointers `p1 = l1.head`, `p2 = l2.head`, and integer `carry = 0`.
+        // 2. Loop while `p1 != nullptr`, `p2 != nullptr`, or `carry != 0`[cite: 6]:
+        //    a. Initialize `sum = carry`.
+        //    b. If `p1 != nullptr`: add `p1->item` to `sum` and advance `p1 = p1->next`[cite: 6].
+        //    c. If `p2 != nullptr`: add `p2->item` to `sum` and advance `p2 = p2->next`[cite: 6].
+        //    d. Update carry: `carry = sum / 10`[cite: 6].
+        //    e. Append the calculated digit `sum % 10` to `result` using `result.addLast()`.
+        // 3. Return the constructed `result` list[cite: 6].
 
         return result;
     }
