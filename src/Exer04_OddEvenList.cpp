@@ -35,23 +35,23 @@ public:
     void oddEvenList(LinkedList<T>& list) {
         using Node = typename LinkedList<T>::Node;
 
-        // Base case: lists with fewer than 3 nodes are already partitioned[cite: 5]
+        // Base case: lists with fewer than 3 nodes are already partitioned
         if (list.head == nullptr || list.head->next == nullptr || list.head->next->next == nullptr) {
             return;
         }
 
         // TODO:
         // 1. Initialize pointers:
-        //    - 'odd' pointing to list.head (1st node)[cite: 5].
-        //    - 'even' pointing to list.head->next (2nd node)[cite: 5].
-        //    - 'evenHead' pointing to even (to reconnect the sublists later)[cite: 5].
-        // 2. Loop while `even != nullptr` and `even->next != nullptr`[cite: 5]:
-        //    a. Bypass even node: odd->next = even->next[cite: 5].
+        //    - 'odd' pointing to list.head (1st node).
+        //    - 'even' pointing to list.head->next (2nd node).
+        //    - 'evenHead' pointing to even (to reconnect the sublists later).
+        // 2. Loop while `even != nullptr` and `even->next != nullptr`:
+        //    a. Bypass even node: odd->next = even->next.
         //    b. Advance odd pointer: odd = odd->next.
-        //    c. Bypass next odd node: even->next = odd->next[cite: 5].
+        //    c. Bypass next odd node: even->next = odd->next.
         //    d. Advance even pointer: even = even->next.
         // 3. Connect the end of the odd chain to the start of the even chain:
-        //    odd->next = evenHead[cite: 5].
+        //    odd->next = evenHead.
         // 4. Update `list.tail` for internal consistency:
         //    - Set `list.tail = even` if even != nullptr, otherwise `list.tail = odd`.
     }
@@ -67,60 +67,78 @@ public:
     }
 };
 
-// Helper function to print numeric vectors
-void printVector(const vector<int>& nums) {
-    size_t n = nums.size();
-    cout << "[";
-    for (size_t i = 0; i < n; i++) {
-        cout << nums[i] << (i + 1 < n ? ", " : "");
-    }
-    cout << "]";
-}
-
-// Test runner function matching the standard testing format
-void runTest(Solution& solver, int testNum, const string& testName,
-             const vector<int>& inputVals, const vector<int>& expectedVals) {
-    LinkedList<int> list = solver.buildList(inputVals);
-    solver.oddEvenList(list);
-
-    LinkedList<int> expectedList = solver.buildList(expectedVals);
-    string outputStr = list.toString();
-    string expectedStr = expectedList.toString();
-    bool passed = (outputStr == expectedStr && list.size() == (int)expectedVals.size());
-
-    cout << "\nTest " << testNum << " Results (" << testName << "):\n";
-    cout << "Input:    "; printVector(inputVals); cout << "\n";
-    cout << "Expected: " << expectedStr << " | Size = " << expectedVals.size() << "\n";
-    cout << "Output:   " << outputStr << " | Size = " << list.size() << "\n";
-    cout << "Status:   " << (passed ? "Passed" : "Failed") << "\n";
-}
-
 int main() {
     Solution solver;
 
-    // --- Test 1 (Assignment Example 1: N = 5, Odd Size) ---
-    // Positions: [1st, 2nd, 3rd, 4th, 5th] -> [1, 2, 3, 4, 5] => [1, 3, 5, 2, 4]
-    runTest(solver, 1, "Assignment Example 1 (N = 5)", {1, 2, 3, 4, 5}, {1, 3, 5, 2, 4});
+    // Test Case 1: Odd size list (LeetCode Example 1: N = 5)
+    {
+        cout << "--- Test Case 1: Assignment Example 1 (N = 5) ---\n";
+        LinkedList<int> list = solver.buildList({1, 2, 3, 4, 5});
+        cout << "Before: " << list.toString() << "\n";
 
-    // --- Test 2 (Assignment Example 2: N = 7) ---
-    // [2, 1, 3, 5, 6, 4, 7] => Odds: [2, 3, 6, 7], Evens: [1, 5, 4] => [2, 3, 6, 7, 1, 5, 4]
-    runTest(solver, 2, "Assignment Example 2 (N = 7)", {2, 1, 3, 5, 6, 4, 7}, {2, 3, 6, 7, 1, 5, 4});
+        // TODO: Rearrange nodes using solver.oddEvenList(list) and print result (Expected: [1, 3, 5, 2, 4], Size: 5)
 
-    // --- Test 3 (Even size list: N = 4) ---
-    // [10, 20, 30, 40] => [10, 30, 20, 40]
-    runTest(solver, 3, "Even Length List (N = 4)", {10, 20, 30, 40}, {10, 30, 20, 40});
+    }
 
-    // --- Test 4 (Small list: N = 2) ---
-    runTest(solver, 4, "Two Elements List (N = 2)", {1, 2}, {1, 2});
+    // Test Case 2: Assignment Example 2 (N = 7)
+    {
+        cout << "\n--- Test Case 2: Assignment Example 2 (N = 7) ---\n";
+        LinkedList<int> list = solver.buildList({2, 1, 3, 5, 6, 4, 7});
+        cout << "Before: " << list.toString() << "\n";
 
-    // --- Test 5 (Single element list: N = 1) ---
-    runTest(solver, 5, "Single Element List (N = 1)", {42}, {42});
+        // TODO: Rearrange nodes using solver.oddEvenList(list) and print result (Expected: [2, 3, 6, 7, 1, 5, 4], Size: 7)
 
-    // --- Test 6 (Empty list: N = 0) ---
-    runTest(solver, 6, "Empty List (N = 0)", {}, {});
+    }
 
-    // --- Test 7 (Negative and duplicate elements) ---
-    runTest(solver, 7, "Duplicates and Negatives (N = 6)", {-1, 0, -3, 5, -1, 8}, {-1, -3, -1, 0, 5, 8});
+    // Test Case 3: Even size list (N = 4)
+    {
+        cout << "\n--- Test Case 3: Even Length List (N = 4) ---\n";
+        LinkedList<int> list = solver.buildList({10, 20, 30, 40});
+        cout << "Before: " << list.toString() << "\n";
+
+        // TODO: Rearrange nodes using solver.oddEvenList(list) and print result (Expected: [10, 30, 20, 40], Size: 4)
+
+    }
+
+    // Test Case 4: Two elements list (N = 2)
+    {
+        cout << "\n--- Test Case 4: Two Elements List (N = 2) ---\n";
+        LinkedList<int> list = solver.buildList({1, 2});
+        cout << "Before: " << list.toString() << "\n";
+
+        // TODO: Rearrange nodes using solver.oddEvenList(list) and print result (Expected: [1, 2], Size: 2)
+
+    }
+
+    // Test Case 5: Single element list (N = 1)
+    {
+        cout << "\n--- Test Case 5: Single Element List (N = 1) ---\n";
+        LinkedList<int> list = solver.buildList({42});
+        cout << "Before: " << list.toString() << "\n";
+
+        // TODO: Rearrange nodes using solver.oddEvenList(list) and print result (Expected: [42], Size: 1)
+
+    }
+
+    // Test Case 6: Empty list (N = 0)
+    {
+        cout << "\n--- Test Case 6: Empty List (N = 0) ---\n";
+        LinkedList<int> list = solver.buildList({});
+        cout << "Before: " << list.toString() << "\n";
+
+        // TODO: Rearrange nodes using solver.oddEvenList(list) and print result (Expected: [], Size: 0)
+
+    }
+
+    // Test Case 7: Duplicates and negative elements (N = 6)
+    {
+        cout << "\n--- Test Case 7: Duplicates and Negatives (N = 6) ---\n";
+        LinkedList<int> list = solver.buildList({-1, 0, -3, 5, -1, 8});
+        cout << "Before: " << list.toString() << "\n";
+
+        // TODO: Rearrange nodes using solver.oddEvenList(list) and print result (Expected: [-1, -3, -1, 0, 5, 8], Size: 6)
+
+    }
 
     return 0;
 }

@@ -72,50 +72,68 @@ public:
     }
 };
 
-// Helper function to print numeric vectors
-void printVector(const vector<int>& nums) {
-    size_t n = nums.size();
-    cout << "[";
-    for (size_t i = 0; i < n; i++) {
-        cout << nums[i] << (i + 1 < n ? ", " : "");
-    }
-    cout << "]";
-}
-
-// Test runner function matching the standard testing format
-void runTest(Solution& solver, int testNum, const string& testName,
-             const vector<int>& inputVals, bool expected) {
-    LinkedList<int> list = solver.buildList(inputVals);
-    bool output = solver.isPalindrome(list);
-    bool passed = (output == expected);
-
-    cout << "\nTest " << testNum << " Results (" << testName << "):\n";
-    cout << "Input:    "; printVector(inputVals); cout << " (as " << list.toString() << ")\n";
-    cout << "Expected: " << (expected ? "true" : "false") << "\n";
-    cout << "Output:   " << (output ? "true" : "false") << "\n";
-    cout << "Status:   " << (passed ? "Passed" : "Failed") << "\n";
-}
-
 int main() {
     Solution solver;
 
-    // --- Test 1 (LeetCode Example 1: Even Length Palindrome) ---
-    runTest(solver, 1, "Even Length Palindrome (N = 4)", {1, 2, 2, 1}, true);
+    // Test Case 1: Even length palindrome (LeetCode Example 1)
+    {
+        cout << "--- Test Case 1: Even Length Palindrome (N = 4) ---\n";
+        LinkedList<int> list = solver.buildList({1, 2, 2, 1});
+        cout << "Original List: " << list.toString() << "\n";
 
-    // --- Test 2 (LeetCode Example 2: Not a Palindrome) ---
-    runTest(solver, 2, "Not a Palindrome (N = 2)", {1, 2}, false);
+        // TODO: Check if 'list' is a palindrome using solver.isPalindrome(list) and print result (Expected: true)
 
-    // --- Test 3 (Odd Length Palindrome) ---
-    runTest(solver, 3, "Odd Length Palindrome (N = 5)", {1, 2, 3, 2, 1}, true);
+    }
 
-    // --- Test 4 (Single Element) ---
-    runTest(solver, 4, "Single Element List (N = 1)", {99}, true);
+    // Test Case 2: Not a palindrome (LeetCode Example 2)
+    {
+        cout << "\n--- Test Case 2: Not a Palindrome (N = 2) ---\n";
+        LinkedList<int> list = solver.buildList({1, 2});
+        cout << "Original List: " << list.toString() << "\n";
 
-    // --- Test 5 (Negative and Duplicate Values Palindrome) ---
-    runTest(solver, 5, "Palindromic with Negatives (N = 6)", {-5, 10, 0, 0, 10, -5}, true);
+        // TODO: Check if 'list' is a palindrome using solver.isPalindrome(list) and print result (Expected: false)
 
-    // --- Test 6 (Almost Palindrome - Mismatch at Extremes) ---
-    runTest(solver, 6, "Mismatch at Extremes (N = 4)", {1, 2, 2, 3}, false);
+    }
+
+    // Test Case 3: Odd length palindrome
+    {
+        cout << "\n--- Test Case 3: Odd Length Palindrome (N = 5) ---\n";
+        LinkedList<int> list = solver.buildList({1, 2, 3, 2, 1});
+        cout << "Original List: " << list.toString() << "\n";
+
+        // TODO: Check if 'list' is a palindrome using solver.isPalindrome(list) and print result (Expected: true)
+
+    }
+
+    // Test Case 4: Single element list
+    {
+        cout << "\n--- Test Case 4: Single Element List (N = 1) ---\n";
+        LinkedList<int> list = solver.buildList({99});
+        cout << "Original List: " << list.toString() << "\n";
+
+        // TODO: Check if 'list' is a palindrome using solver.isPalindrome(list) and print result (Expected: true)
+
+    }
+
+    // Test Case 5: Palindromic list with negative and duplicate values
+    {
+        cout << "\n--- Test Case 5: Palindromic with Negatives (N = 6) ---\n";
+        LinkedList<int> list = solver.buildList({-5, 10, 0, 0, 10, -5});
+        cout << "Original List: " << list.toString() << "\n";
+
+        // TODO: Check if 'list' is a palindrome using solver.isPalindrome(list) and print result (Expected: true)
+
+    }
+
+    // Test Case 6: Almost a palindrome (mismatch at extremes)
+    {
+        cout << "\n--- Test Case 6: Mismatch at Extremes (N = 4) ---\n";
+        LinkedList<int> list = solver.buildList({1, 2, 2, 3});
+        cout << "Original List: " << list.toString() << "\n";
+
+        // TODO: Check if 'list' is a palindrome using solver.isPalindrome(list) and print result (Expected: false)
+
+    }
 
     return 0;
 }

@@ -63,51 +63,58 @@ public:
     }
 };
 
-// Helper function to print numeric vectors
-void printVector(const vector<int>& nums) {
-    size_t n = nums.size();
-    cout << "[";
-    for (size_t i = 0; i < n; i++) {
-        cout << nums[i] << (i + 1 < n ? ", " : "");
-    }
-    cout << "]";
-}
-
-// Test runner function matching the standard testing format
-void runTest(Solution& solver, int testNum, const string& testName,
-             const vector<int>& inputVals, const vector<int>& expectedVals) {
-    LinkedList<int> list = solver.buildList(inputVals);
-    LinkedList<int> expectedList = solver.buildList(expectedVals);
-    LinkedList<int> outputList = solver.getMiddleSublist(list);
-
-    string expectedStr = expectedList.toString();
-    string outputStr = outputList.toString();
-    bool passed = (expectedStr == outputStr);
-
-    cout << "\nTest " << testNum << " Results (" << testName << "):\n";
-    cout << "Input:    "; printVector(inputVals); cout << "\n";
-    cout << "Expected: " << expectedStr << "\n";
-    cout << "Output:   " << outputStr << "\n";
-    cout << "Status:   " << (passed ? "Passed" : "Failed") << "\n";
-}
-
 int main() {
     Solution solver;
 
-    // --- Test 1 (LeetCode Example 1: Odd Length) ---
-    runTest(solver, 1, "Odd Length List (N = 5)", {1, 2, 3, 4, 5}, {3, 4, 5});
+    // Test Case 1: Odd length list (LeetCode Example 1)
+    {
+        cout << "--- Test Case 1: Odd Length List (N = 5) ---\n";
+        LinkedList<int> list = solver.buildList({1, 2, 3, 4, 5});
+        cout << "Original List: " << list.toString() << "\n";
 
-    // --- Test 2 (LeetCode Example 2: Even Length) ---
-    runTest(solver, 2, "Even Length List (N = 6)", {1, 2, 3, 4, 5, 6}, {4, 5, 6});
+        // TODO: Extract the middle sublist using solver.getMiddleSublist(list) and print result (Expected: [3, 4, 5])
 
-    // --- Test 3 (Single Element) ---
-    runTest(solver, 3, "Single Element List (N = 1)", {42}, {42});
+    }
 
-    // --- Test 4 (Two Elements) ---
-    runTest(solver, 4, "Two Elements List (N = 2)", {10, 20}, {20});
+    // Test Case 2: Even length list (LeetCode Example 2)
+    {
+        cout << "\n--- Test Case 2: Even Length List (N = 6) ---\n";
+        LinkedList<int> list = solver.buildList({1, 2, 3, 4, 5, 6});
+        cout << "Original List: " << list.toString() << "\n";
 
-    // --- Test 5 (Negative and Duplicate Values) ---
-    runTest(solver, 5, "Duplicates and Negatives (N = 7)", {-3, 0, 0, 5, 5, 8, 12}, {5, 5, 8, 12});
+        // TODO: Extract the middle sublist using solver.getMiddleSublist(list) and print result (Expected: [4, 5, 6])
+
+    }
+
+    // Test Case 3: Single element list
+    {
+        cout << "\n--- Test Case 3: Single Element List (N = 1) ---\n";
+        LinkedList<int> list = solver.buildList({42});
+        cout << "Original List: " << list.toString() << "\n";
+
+        // TODO: Extract the middle sublist using solver.getMiddleSublist(list) and print result (Expected: [42])
+
+    }
+
+    // Test Case 4: Two elements list
+    {
+        cout << "\n--- Test Case 4: Two Elements List (N = 2) ---\n";
+        LinkedList<int> list = solver.buildList({10, 20});
+        cout << "Original List: " << list.toString() << "\n";
+
+        // TODO: Extract the middle sublist using solver.getMiddleSublist(list) and print result (Expected: [20])
+
+    }
+
+    // Test Case 5: Negative and duplicate values
+    {
+        cout << "\n--- Test Case 5: Duplicates and Negatives (N = 7) ---\n";
+        LinkedList<int> list = solver.buildList({-3, 0, 0, 5, 5, 8, 12});
+        cout << "Original List: " << list.toString() << "\n";
+
+        // TODO: Extract the middle sublist using solver.getMiddleSublist(list) and print result (Expected: [5, 5, 8, 12])
+
+    }
 
     return 0;
 }

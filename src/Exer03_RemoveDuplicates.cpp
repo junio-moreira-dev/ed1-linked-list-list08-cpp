@@ -31,7 +31,7 @@ public:
     void deleteDuplicates(LinkedList<T>& list) {
         using Node = typename LinkedList<T>::Node;
 
-        // Base cases: if the list has 0 or 1 element, no duplicates can exist[cite: 4]
+        // Base cases: if the list has 0 or 1 element, no duplicates can exist
         if (list.head == nullptr || list.head->next == nullptr) {
             return;
         }
@@ -39,11 +39,11 @@ public:
         // TODO:
         // 1. Initialize a pointer `current` pointing to `list.head`.
         // 2. Loop while `current != nullptr` and `current->next != nullptr`.
-        // 3. If `current->item == current->next->item`:[cite: 4]
-        //    a. Store `current->next` in a temporary pointer `nodeToDelete`.[cite: 4]
-        //    b. Bypass the duplicate: set `current->next = current->next->next`.[cite: 4]
+        // 3. If `current->item == current->next->item`:
+        //    a. Store `current->next` in a temporary pointer `nodeToDelete`.
+        //    b. Bypass the duplicate: set `current->next = current->next->next`.
         //    c. If `nodeToDelete == list.tail`, update `list.tail = current`.
-        //    d. Free memory explicitly using `delete nodeToDelete`.[cite: 4]
+        //    d. Free memory explicitly using `delete nodeToDelete`.
         //    e. Decrement `list.count--`.
         // 4. Otherwise (values are different):
         //    a. Advance `current = current->next`.
@@ -60,57 +60,78 @@ public:
     }
 };
 
-// Helper function to print numeric vectors
-void printVector(const vector<int>& nums) {
-    size_t n = nums.size();
-    cout << "[";
-    for (size_t i = 0; i < n; i++) {
-        cout << nums[i] << (i + 1 < n ? ", " : "");
-    }
-    cout << "]";
-}
-
-// Test runner function matching the standard testing format
-void runTest(Solution& solver, int testNum, const string& testName,
-             const vector<int>& inputVals, const vector<int>& expectedVals) {
-    LinkedList<int> list = solver.buildList(inputVals);
-    solver.deleteDuplicates(list);
-
-    LinkedList<int> expectedList = solver.buildList(expectedVals);
-    string outputStr = list.toString();
-    string expectedStr = expectedList.toString();
-    bool passed = (outputStr == expectedStr && list.size() == (int)expectedVals.size());
-
-    cout << "\nTest " << testNum << " Results (" << testName << "):\n";
-    cout << "Input:    "; printVector(inputVals); cout << "\n";
-    cout << "Expected: " << expectedStr << " | Size = " << expectedVals.size() << "\n";
-    cout << "Output:   " << outputStr << " | Size = " << list.size() << "\n";
-    cout << "Status:   " << (passed ? "Passed" : "Failed") << "\n";
-}
-
 int main() {
     Solution solver;
 
-    // --- Test 1 (LeetCode Example 1) ---
-    runTest(solver, 1, "Assignment Example 1 (N = 3)", {1, 1, 2}, {1, 2});
+    // Test Case 1: Simple duplicate removal (LeetCode Example 1)
+    {
+        cout << "--- Test Case 1: Assignment Example 1 (N = 3) ---\n";
+        LinkedList<int> list = solver.buildList({1, 1, 2});
+        cout << "Before: " << list.toString() << "\n";
 
-    // --- Test 2 (LeetCode Example 2) ---
-    runTest(solver, 2, "Assignment Example 2 (N = 5)", {1, 1, 2, 3, 3}, {1, 2, 3});
+        // TODO: Remove duplicates using solver.deleteDuplicates(list) and print result (Expected: [1, 2], Size: 2)
 
-    // --- Test 3 (All elements identical) ---
-    runTest(solver, 3, "All Elements Identical (N = 5)", {7, 7, 7, 7, 7}, {7});
+    }
 
-    // --- Test 4 (Already without duplicates) ---
-    runTest(solver, 4, "No Duplicates (N = 4)", {10, 20, 30, 40}, {10, 20, 30, 40});
+    // Test Case 2: Multiple duplicates throughout the list (LeetCode Example 2)
+    {
+        cout << "\n--- Test Case 2: Assignment Example 2 (N = 5) ---\n";
+        LinkedList<int> list = solver.buildList({1, 1, 2, 3, 3});
+        cout << "Before: " << list.toString() << "\n";
 
-    // --- Test 5 (Single element list) ---
-    runTest(solver, 5, "Single Element List (N = 1)", {42}, {42});
+        // TODO: Remove duplicates using solver.deleteDuplicates(list) and print result (Expected: [1, 2, 3], Size: 3)
 
-    // --- Test 6 (Empty list) ---
-    runTest(solver, 6, "Empty List (N = 0)", {}, {});
+    }
 
-    // --- Test 7 (Negative values and duplicates at the tail) ---
-    runTest(solver, 7, "Negatives and Tail Duplicates (N = 6)", {-5, -5, -2, 0, 4, 4}, {-5, -2, 0, 4});
+    // Test Case 3: All elements identical
+    {
+        cout << "\n--- Test Case 3: All Elements Identical (N = 5) ---\n";
+        LinkedList<int> list = solver.buildList({7, 7, 7, 7, 7});
+        cout << "Before: " << list.toString() << "\n";
+
+        // TODO: Remove duplicates using solver.deleteDuplicates(list) and print result (Expected: [7], Size: 1)
+
+    }
+
+    // Test Case 4: Already without duplicates
+    {
+        cout << "\n--- Test Case 4: No Duplicates (N = 4) ---\n";
+        LinkedList<int> list = solver.buildList({10, 20, 30, 40});
+        cout << "Before: " << list.toString() << "\n";
+
+        // TODO: Remove duplicates using solver.deleteDuplicates(list) and print result (Expected: [10, 20, 30, 40], Size: 4)
+
+    }
+
+    // Test Case 5: Single element list
+    {
+        cout << "\n--- Test Case 5: Single Element List (N = 1) ---\n";
+        LinkedList<int> list = solver.buildList({42});
+        cout << "Before: " << list.toString() << "\n";
+
+        // TODO: Remove duplicates using solver.deleteDuplicates(list) and print result (Expected: [42], Size: 1)
+
+    }
+
+    // Test Case 6: Empty list
+    {
+        cout << "\n--- Test Case 6: Empty List (N = 0) ---\n";
+        LinkedList<int> list = solver.buildList({});
+        cout << "Before: " << list.toString() << "\n";
+
+        // TODO: Remove duplicates using solver.deleteDuplicates(list) and print result (Expected: [], Size: 0)
+
+    }
+
+    // Test Case 7: Negative values and duplicates at the tail
+    {
+        cout << "\n--- Test Case 7: Negatives and Tail Duplicates (N = 6) ---\n";
+        LinkedList<int> list = solver.buildList({-5, -5, -2, 0, 4, 4});
+        cout << "Before: " << list.toString() << "\n";
+
+        // TODO: Remove duplicates using solver.deleteDuplicates(list) and print result (Expected: [-5, -2, 0, 4], Size: 4)
+
+    }
 
     return 0;
 }
